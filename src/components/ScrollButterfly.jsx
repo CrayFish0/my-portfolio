@@ -8,6 +8,7 @@ const ScrollButterfly = () => {
   const [mousePos, setMousePos] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
   const [trail, setTrail] = useState([])
   const floatingAnimationRef = useRef(null)
+  const moveAnimationRef = useRef(null)
   const mouseTimeoutRef = useRef(null)
 
   useEffect(() => {
@@ -45,6 +46,11 @@ const ScrollButterfly = () => {
       // Stop floating animation when mouse is moving
       stopFloatingAnimation()
 
+      // Kill any existing move animation
+      if (moveAnimationRef.current) {
+        moveAnimationRef.current.kill()
+      }
+
       // Clear existing timeout
       if (mouseTimeoutRef.current) {
         clearTimeout(mouseTimeoutRef.current)
@@ -54,6 +60,23 @@ const ScrollButterfly = () => {
       const currentX = gsap.getProperty(butterfly, "x") || previousPos.x
       const currentY = gsap.getProperty(butterfly, "y") || previousPos.y
 
+      // Calculate direction of movement (from current position to target)
+      const deltaX = newPos.x - currentX
+      const deltaY = newPos.y - currentY
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY)
+      
+      // Only move if distance is significant (prevents twitching)
+      if (distance < 2) return
+      
+      const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI)
+      
+      // Calculate target position with offset (stop before cursor)
+      const offset = 30 // Distance to stop before cursor
+      const normalizedX = deltaX / distance
+      const normalizedY = deltaY / distance
+      const targetX = newPos.x - (normalizedX * offset)
+      const targetY = newPos.y - (normalizedY * offset)
+      
       // Add current butterfly position to trail
       trailPoints.push({ x: currentX, y: currentY, id: Date.now() })
       
@@ -63,34 +86,23 @@ const ScrollButterfly = () => {
       }
       
       setTrail([...trailPoints])
-
-      // Calculate direction of movement (from current position to target)
-      const deltaX = newPos.x - currentX
-      const deltaY = newPos.y - currentY
-      const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI)
       
-      // Animate butterfly to cursor position with rotation
-      gsap.to(butterfly, {
-        x: newPos.x,
-        y: newPos.y,
+      // Animate butterfly to offset position with rotation
+      moveAnimationRef.current = gsap.to(butterfly, {
+        x: targetX,
+        y: targetY,
         rotation: angle,
-        duration: 0.8,
+        duration: 0.4,
         ease: "power2.out",
         onUpdate: function() {
           // Update trail during animation
           const animatedX = gsap.getProperty(butterfly, "x")
           const animatedY = gsap.getProperty(butterfly, "y")
           
-          // Calculate rotation based on actual movement direction
-          const movementDeltaX = animatedX - previousPos.x
-          const movementDeltaY = animatedY - previousPos.y
-          
-          if (Math.abs(movementDeltaX) > 1 || Math.abs(movementDeltaY) > 1) {
-            const movementAngle = Math.atan2(movementDeltaY, movementDeltaX) * (180 / Math.PI)
-            gsap.set(butterfly, { rotation: movementAngle })
-          }
-          
           previousPos = { x: animatedX, y: animatedY }
+        },
+        onComplete: function() {
+          moveAnimationRef.current = null
         }
       })
 
@@ -116,6 +128,9 @@ const ScrollButterfly = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       stopFloatingAnimation()
+      if (moveAnimationRef.current) {
+        moveAnimationRef.current.kill()
+      }
       if (mouseTimeoutRef.current) {
         clearTimeout(mouseTimeoutRef.current)
       }

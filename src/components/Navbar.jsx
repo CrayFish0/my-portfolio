@@ -48,13 +48,13 @@ const Navbar = () => {
       <div className="section-padding container-max">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
+          <motion.button
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-bold gradient-text cursor-pointer terminal-text retro-glow"
+            className="text-2xl font-bold gradient-text cursor-pointer terminal-text retro-glow bg-transparent border-none p-0"
             onClick={() => scrollToSection('#home')}
           >
             &gt;<span className="terminal-cursor">_</span>
-          </motion.div>
+          </motion.button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
