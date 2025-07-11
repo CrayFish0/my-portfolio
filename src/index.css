@@ -1,0 +1,424 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-feature-settings: 'liga' 1, 'calt' 1;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
+  }
+  
+  .section-padding {
+    @apply px-4 md:px-8 lg:px-16 xl:px-24;
+  }
+  
+  .container-max {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-dark-800 border border-gray-200 dark:border-dark-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  .skill-icon {
+    @apply w-12 h-12 md:w-16 md:h-16 text-primary-600 dark:text-primary-400 transition-all duration-300 hover:scale-110;
+  }
+  
+  .terminal-text {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', 'Consolas', 'Monaco', 'Courier New', monospace;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 5px rgba(14, 165, 233, 0.3);
+  }
+  
+  .terminal-prompt::before {
+    content: '> ';
+    color: #0ea5e9;
+    font-weight: bold;
+  }
+  
+  .retro-glow {
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5), 0 0 20px rgba(14, 165, 233, 0.3);
+  }
+  
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  /* 3D Card Flip Effects - Advanced */
+  .flip-card {
+    -ms-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    height: 475px;
+    width: 100%;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+  }
+  
+  .flip-card:hover .flip-card-inner {
+    transform: rotateY(-180deg);
+  }
+  
+  .flip-card-front, .flip-card-back {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    min-height: 475px;
+    -ms-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+    -webkit-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+    transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .flip-card-front {
+    -ms-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 2;
+  }
+  
+  .flip-card:hover .flip-card-front {
+    -ms-transform: rotateY(-180deg);
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -ms-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 50%, #d1d5db 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    z-index: 1;
+  }
+  
+  .flip-card:hover .flip-card-back {
+    -ms-transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card-back.dark {
+    background: linear-gradient(135deg, #334155 0%, #1e293b 50%, #0f172a 100%);
+  }
+  
+  .flip-card .inner {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    padding: 60px;
+    outline: 1px solid transparent;
+    -webkit-perspective: inherit;
+    perspective: inherit;
+    z-index: 2;
+    -ms-transform: translateY(-50%) translateZ(60px) scale(.94);
+    -webkit-transform: translateY(-50%) translateZ(60px) scale(.94);
+    transform: translateY(-50%) translateZ(60px) scale(.94);
+    top: 50%;
+    color: inherit;
+  }
+  
+  .flip-card-header {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+  }
+  
+  .flip-card-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  
+  .flip-card-button {
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.5rem;
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(.4, .2, .2, 1);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 180px;
+    justify-content: center;
+  }
+  
+  .flip-card-button-dark {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+  }
+  
+  .flip-card-button-light {
+    border: 2px solid #374151;
+    color: #374151;
+  }
+  
+  .flip-card-button-dark:hover {
+    transform: scale(1.05) translateZ(10px);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #1e40af;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .flip-card-button-light:hover {
+    transform: scale(1.05) translateZ(10px);
+    background-color: rgba(55, 65, 81, 0.9);
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .flip-card-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .flip-card-tech {
+    background: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    backdrop-filter: blur(5px);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  
+  .flip-card-hover-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.7;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .color-white {
+    color: #ffffff;
+  }
+
+  /* Terminal Cursor Animation */
+  .terminal-cursor {
+    animation: blink 1s infinite;
+    color: #0ea5e9;
+    font-weight: 400;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  /* Butterfly Animation Styles */
+  .butterfly-svg {
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 10px rgba(14, 165, 233, 0.3));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .butterfly-svg:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1)) drop-shadow(0 0 15px rgba(14, 165, 233, 0.5));
+  }
+
+  .butterfly-wing {
+    transform-origin: 50% 50%;
+    animation: flap 0.8s ease-in-out infinite;
+  }
+
+  .butterfly-wing.top-left {
+    animation-delay: 0s;
+  }
+
+  .butterfly-wing.top-right {
+    animation-delay: 0.1s;
+  }
+
+  .butterfly-wing.bottom-left {
+    animation-delay: 0.2s;
+  }
+
+  .butterfly-wing.bottom-right {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes flap {
+    0%, 100% {
+      transform: rotateY(0deg) scaleX(1);
+    }
+    50% {
+      transform: rotateY(20deg) scaleX(0.8);
+    }
+  }
+
+  .butterfly-body {
+    animation: bodyWiggle 2s ease-in-out infinite;
+  }
+
+  @keyframes bodyWiggle {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(1deg);
+    }
+    75% {
+      transform: rotate(-1deg);
+    }
+  }
+
+  .antenna {
+    animation: antennaMove 1.5s ease-in-out infinite;
+  }
+
+  @keyframes antennaMove {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+
+  /* Trail Animation Styles */
+  .trail-point {
+    animation: trailFade 2s ease-out forwards;
+  }
+
+  @keyframes trailFade {
+    0% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  /* Cursor Trail Effects */
+  .trail-point {
+    filter: blur(0.5px);
+    animation: sparkle 1.5s ease-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .butterfly-svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .butterfly-svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  /* Hide butterfly on touch devices to avoid performance issues */
+  @media (hover: none) and (pointer: coarse) {
+    .butterfly-svg {
+      display: none;
+    }
+  }
+}
