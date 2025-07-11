@@ -71,7 +71,7 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 terminal-text">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 terminal-text">
             Get In <span className="gradient-text retro-glow">Touch</span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
@@ -79,7 +79,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -89,7 +89,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6">
                 Let's start a conversation
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
@@ -117,7 +117,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="font-medium text-gray-900 dark:text-white">{info.label}</p>
-                    <p className="text-gray-600 dark:text-gray-400">{info.value}</p>
+                    <p className="text-gray-600 dark:text-gray-400 break-words text-sm">{info.value}</p>
                   </div>
                 </motion.a>
               ))}
@@ -134,7 +134,7 @@ const Contact = () => {
               <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                 Follow me on social media
               </h4>
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-3">
                 {[
                   { name: 'GitHub', url: 'https://github.com/CrayFish0', color: 'hover:text-gray-800' },
                   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/soumyojit-sengupta-o7/', color: 'hover:text-blue-600' },
@@ -195,7 +195,7 @@ const Contact = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Name *
@@ -207,7 +207,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                     placeholder="Your name"
                   />
                 </div>
@@ -223,7 +223,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -240,7 +240,7 @@ const Contact = () => {
                   value={formData.subject}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                   placeholder="What's this about?"
                 />
               </div>
@@ -256,7 +256,7 @@ const Contact = () => {
                   onChange={handleInputChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
+                  className="w-full px-3 py-2 sm:px-4 sm:py-3 border border-gray-300 dark:border-dark-600 rounded-lg bg-white dark:bg-dark-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 resize-none"
                   placeholder="Tell me about your project or just say hello!"
                 />
               </div>

@@ -13,6 +13,25 @@
     cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ffffff" stroke="%230ea5e9" stroke-width="2"><g transform="rotate(15 12 12)"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></g></svg>') 12 12, auto;
   }
   
+  /* Mobile-first responsive typography */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  @media (min-width: 641px) and (max-width: 768px) {
+    html {
+      font-size: 15px;
+    }
+  }
+  
+  @media (min-width: 769px) {
+    html {
+      font-size: 16px;
+    }
+  }
+  
   /* Custom cursor for clickable elements - no rotation */
   a, button, .cursor-pointer, [role="button"] {
     cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ffffff" stroke="%230ea5e9" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>') 12 12, pointer !important;
@@ -83,6 +102,33 @@
     @apply px-4 md:px-8 lg:px-16 xl:px-24;
   }
   
+  /* Mobile-first spacing adjustments */
+  @media (max-width: 640px) {
+    .section-padding {
+      @apply px-3;
+    }
+    
+    .py-20 {
+      @apply py-12;
+    }
+    
+    .space-y-6 > * + * {
+      margin-top: 1rem !important;
+    }
+    
+    .space-y-8 > * + * {
+      margin-top: 1.5rem !important;
+    }
+    
+    .mb-16 {
+      margin-bottom: 2rem !important;
+    }
+    
+    .mb-12 {
+      margin-bottom: 1.5rem !important;
+    }
+  }
+  
   .container-max {
     @apply max-w-7xl mx-auto;
   }
@@ -124,19 +170,37 @@
     51%, 100% { opacity: 0; }
   }
   
-  /* 3D Card Flip Effects - Advanced */
+  /* 3D Card Flip Effects - Mobile First */
   .flip-card {
     -ms-transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-perspective: 1000px;
     perspective: 1000px;
-    height: 475px;
+    height: 300px;
     width: 100%;
     position: relative;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  @media (min-width: 640px) {
+    .flip-card {
+      height: 350px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .flip-card {
+      height: 400px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .flip-card {
+      height: 475px;
+    }
   }
   
   .flip-card-inner {
@@ -157,7 +221,7 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 8px;
-    min-height: 475px;
+    min-height: 300px;
     -ms-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
     -webkit-transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
     transition: transform 0.7s cubic-bezier(.4, .2, .2, 1);
@@ -167,6 +231,24 @@
     position: absolute;
     width: 100%;
     height: 100%;
+  }
+  
+  @media (min-width: 640px) {
+    .flip-card-front, .flip-card-back {
+      min-height: 350px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .flip-card-front, .flip-card-back {
+      min-height: 400px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .flip-card-front, .flip-card-back {
+      min-height: 475px;
+    }
   }
   
   .flip-card-front {
@@ -241,35 +323,72 @@
   }
   
   .flip-card-header {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
   }
   
+  @media (min-width: 640px) {
+    .flip-card-header {
+      font-size: 1.75rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .flip-card-header {
+      font-size: 2rem;
+    }
+  }
+  
   .flip-card-content {
-    font-size: 1rem;
+    font-size: 0.875rem;
     line-height: 1.5;
     margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 640px) {
+    .flip-card-content {
+      font-size: 1rem;
+    }
   }
   
   .flip-card-button {
     background-color: transparent;
     border-radius: 8px;
     cursor: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23ffffff" stroke="%230ea5e9" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>') 12 12, pointer !important;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    margin: 0.5rem;
-    padding: 1rem 1.5rem;
+    margin: 0.25rem;
+    padding: 0.6rem 1rem;
     text-transform: uppercase;
     transition: all 0.3s cubic-bezier(.4, .2, .2, 1);
     backdrop-filter: blur(10px);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    min-width: 180px;
+    gap: 0.4rem;
+    min-width: 140px;
     justify-content: center;
+  }
+  
+  @media (min-width: 640px) {
+    .flip-card-button {
+      font-size: 0.9rem;
+      padding: 0.8rem 1.2rem;
+      margin: 0.4rem;
+      min-width: 160px;
+      gap: 0.5rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .flip-card-button {
+      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      margin: 0.5rem;
+      min-width: 180px;
+    }
   }
   
   .flip-card-button-dark {
