@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
 const ScrollButterfly = () => {
+  // Check if device is mobile
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768
+
+  // Don't render on mobile devices
+  if (isMobile) {
+    return null
+  }
+
   const butterflyRef = useRef(null)
   const containerRef = useRef(null)
   const trailRef = useRef([])
