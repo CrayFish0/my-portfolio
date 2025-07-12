@@ -27,11 +27,19 @@ const Navbar = () => {
   ]
 
   const scrollToSection = (href) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-    setIsOpen(false)
+    setIsOpen(false) // Close mobile menu first
+    
+    // Wait for menu to close before scrolling
+    setTimeout(() => {
+      const element = document.querySelector(href)
+      if (element) {
+        const offsetTop = element.offsetTop - 80 // Account for navbar height
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        })
+      }
+    }, 100)
   }
 
   return (
