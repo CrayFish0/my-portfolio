@@ -25,15 +25,33 @@ const Contact = () => {
     e.preventDefault()
     setFormStatus('loading')
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
-      setFormStatus('success')
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      // Create FormData object for Netlify Forms
+      const formData = new FormData()
+      formData.append('form-name', 'contact')
+      formData.append('name', e.target.name.value)
+      formData.append('email', e.target.email.value)
+      formData.append('subject', e.target.subject.value)
+      formData.append('message', e.target.message.value)
+
+      // Submit to Netlify
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+
+      if (response.ok) {
+        setFormStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error('Form submission failed')
+      }
       
       // Reset status after 5 seconds
       setTimeout(() => setFormStatus(null), 5000)
     } catch (error) {
+      console.error('Form submission error:', error)
       setFormStatus('error')
       setTimeout(() => setFormStatus(null), 5000)
     }
@@ -194,7 +212,18 @@ const Contact = () => {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form 
+              name="contact" 
+              method="POST" 
+              netlify="true" 
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              {/* Hidden fields for Netlify Forms */}
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="bot-field" />
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
