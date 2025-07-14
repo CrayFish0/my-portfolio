@@ -2,6 +2,10 @@
 
 A modern, responsive portfolio website built with React, Tailwind CSS, and Framer Motion.
 
+## 🌐 Live Demo
+
+**[View Live Site: www.nexure.me](https://www.nexure.me)**
+
 ## Features
 
 - 🎨 Modern, minimalistic design
